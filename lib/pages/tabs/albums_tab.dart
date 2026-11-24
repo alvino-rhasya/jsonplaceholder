@@ -10,11 +10,14 @@ class AlbumsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AsyncDataView<Albums>(
-      onFetch: ApiService.fetchAlbums,
-      itemBuilder: (context, albums, index) {
-        return AlbumWidget(albums: albums);
-      },
       title: 'Albums',
+      onFetch: ApiService.fetchAlbums,
+      searchFilter: (album, query) {
+        return album.title.toLowerCase().contains(query.toLowerCase());
+      },
+      itemBuilder: (context, album, index) {
+        return AlbumWidget(albums: album);
+      },
     );
   }
 }

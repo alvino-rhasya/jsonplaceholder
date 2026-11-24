@@ -10,11 +10,14 @@ class TodosTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AsyncDataView<Todos>(
-      onFetch: ApiService.fetchTodos,
-      itemBuilder: (context, todos, index) {
-        return TodoWidget(todos: todos);
-      },
       title: 'Todos',
+      onFetch: ApiService.fetchTodos,
+      searchFilter: (todo, query) {
+        return todo.title.toLowerCase().contains(query.toLowerCase());
+      },
+      itemBuilder: (context, todo, index) {
+        return TodoWidget(todos: todo);
+      },
     );
   }
 }

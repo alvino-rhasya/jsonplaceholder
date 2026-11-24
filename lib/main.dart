@@ -8,19 +8,40 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    const primaryColor = Color(0xFF6366F1); // Indigo
+    const secondaryColor = Color(0xFF8B5CF6); // Purple
+
     return MaterialApp(
-      title: 'JSONPLACEHOLDER',
+      title: 'JSONPlaceholder Pro',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
+          seedColor: primaryColor,
+          secondary: secondaryColor,
+          brightness: Brightness.light,
+          surface: Colors.white,
+        ),
+        scaffoldBackgroundColor: const Color(0xFFF8FAFC),
+        cardTheme: const CardThemeData(
+          elevation: 0,
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(Radius.circular(16)),
+            side: BorderSide(color: Color(0xFFE2E8F0)),
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          scrolledUnderElevation: 1,
+          backgroundColor: Colors.white,
+          foregroundColor: Color(0xFF0F172A),
+          centerTitle: false,
         ),
       ),
       home: const HomePage(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }

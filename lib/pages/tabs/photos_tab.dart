@@ -10,11 +10,14 @@ class PhotosTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AsyncDataView<Photos>(
-      onFetch: ApiService.fetchPhotos,
-      itemBuilder: (context, photos, index) {
-        return PhotoWidget(photos: photos);
-      },
       title: 'Photos',
+      onFetch: ApiService.fetchPhotos,
+      searchFilter: (photo, query) {
+        return photo.title.toLowerCase().contains(query.toLowerCase());
+      },
+      itemBuilder: (context, photo, index) {
+        return PhotoWidget(photos: photo);
+      },
     );
   }
 }

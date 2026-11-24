@@ -10,11 +10,17 @@ class CommentsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AsyncDataView<Comments>(
-      onFetch: ApiService.fetchComments,
-      itemBuilder: (context, comments, index) {
-        return CommentWidget(comments: comments);
-      },
       title: 'Comments',
+      onFetch: ApiService.fetchComments,
+      searchFilter: (comment, query) {
+        final q = query.toLowerCase();
+        return comment.name.toLowerCase().contains(q) ||
+            comment.email.toLowerCase().contains(q) ||
+            comment.body.toLowerCase().contains(q);
+      },
+      itemBuilder: (context, comment, index) {
+        return CommentWidget(comments: comment);
+      },
     );
   }
 }
